@@ -2,6 +2,17 @@
 
 https://www.django-rest-framework.org/tutorial/1-serialization/#tutorial-1-serialization
 
+## Steps to Run
+
+```bash
+git clone ...
+python3 -m venv env
+source env/bin/activate
+pip install -r requirements.txt
+python manage.py runserver
+deactivate
+```
+
 ## Tutorial 1: Serialization
 
 ```bash
