@@ -41,6 +41,8 @@ snippet.save()
 
 snippet = Snippet(code='print("hello, world")\n')
 snippet.save()
+snippet
+# <Snippet: Snippet object (None)>
 
 ## take a look at serializing one of those instances
 serializer = SnippetSerializer(snippet)
@@ -56,7 +58,12 @@ content
 import io
 
 stream = io.BytesIO(content)
+stream
+# <_io.BytesIO object at 0x10ce9c950>
+
 data = JSONParser().parse(stream)
+data
+# {'id': 4, 'title': '', 'code': 'foo = "bar"\n', 'linenos': False, 'language': 'python', 'style': 'friendly'}
 
 ## restore those native datatypes into a fully populated object instance
 serializer = SnippetSerializer(data=data)
@@ -71,5 +78,24 @@ serializer.save()
 serializer = SnippetSerializer(Snippet.objects.all(), many=True)
 serializer.data
 # [OrderedDict([('id', 1), ('title', ''), ('code', 'foo = "bar"\n'), ('linenos', False), ('language', 'python'), ('style', 'friendly')]), OrderedDict([('id', 2), ('title', ''), ('code', 'print("hello, world")\n'), ('linenos', False), ('language', 'python'), ('style', 'friendly')]), OrderedDict([('id', 3), ('title', ''), ('code', 'print("hello, world")'), ('linenos', False), ('language', 'python'), ('style', 'friendly')])]
+
+```
+
+### Using ModelSerializers
+
+in the `python manage.py shell`
+
+```python
+# inspect all the fields in a serializer instance
+from snippets.serializers import SnippetSerializer
+serializer = SnippetSerializer()
+print(repr(serializer))
+# SnippetSerializer():
+#    id = IntegerField(label='ID', read_only=True)
+#    title = CharField(allow_blank=True, max_length=100, required=False)
+#    code = CharField(style={'base_template': 'textarea.html'})
+#    linenos = BooleanField(required=False)
+#    language = ChoiceField(choices=[('Clipper', 'FoxPro'), ('Cucumber', 'Gherkin'), ('RobotFramework', 'RobotFramework'), ('abap', 'ABAP'), ('ada', 'Ada')...
+#    style = ChoiceField(choices=[('autumn', 'autumn'), ('borland', 'borland'), ('bw', 'bw'), ('colorful', 'colorful')...
 
 ```
