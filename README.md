@@ -190,3 +190,43 @@ http --json POST http://127.0.0.1:8000/snippets/ code="print(456)"
     "style": "friendly"
 }
 ```
+
+## Tutorial 4: Authentication & Permissions
+
+```bash
+# delete the database and start again
+rm -f db.sqlite3
+rm -r snippets/migrations
+python manage.py makemigrations snippets
+python manage.py migrate
+
+# Create users
+python manage.py createsuperuser
+Username: dev
+Email: dev@email.com
+Password: 111111
+Password (again): 111111
+```
+
+### Authenticating with the API
+
+```bash
+http POST http://127.0.0.1:8000/snippets/ code="print(123)"
+
+{
+    "detail": "Authentication credentials were not provided."
+}
+
+
+http -a dev:111111 POST http://127.0.0.1:8000/snippets/ code="print(789)"
+
+{
+    "id": 1,
+    "owner": "admin",
+    "title": "foo",
+    "code": "print(789)",
+    "linenos": false,
+    "language": "python",
+    "style": "friendly"
+}
+```
