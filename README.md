@@ -233,6 +233,8 @@ http -a dev:111111 POST http://127.0.0.1:8000/snippets/ code="print(789)"
 
 ## Tutorial 5: Relationships & Hyperlinked APIs
 
+The hyperlink is not into the db migration. It's kind of utility helper field (called `custom action`)
+
 The api suffix
 
 - .json
