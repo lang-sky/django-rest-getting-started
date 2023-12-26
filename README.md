@@ -150,3 +150,43 @@ HTTP/1.1 200 OK
   "style": "friendly"
 }
 ```
+
+## Tutorial 2: Requests and Responses
+
+https://www.django-rest-framework.org/tutorial/2-requests-and-responses/#tutorial-2-requests-and-responses
+
+### format_suffix_patterns
+
+```bash
+## control the format of the response
+http http://127.0.0.1:8000/snippets/ Accept:application/json  # Request JSON
+http http://127.0.0.1:8000/snippets/ Accept:text/html         # Request HTML
+
+http http://127.0.0.1:8000/snippets.json  # JSON suffix
+http http://127.0.0.1:8000/snippets.api   # Browsable API suffix
+
+## control the format of the request
+# POST using form data
+http --form POST http://127.0.0.1:8000/snippets/ code="print(123)"
+
+{
+  "id": 3,
+  "title": "",
+  "code": "print(123)",
+  "linenos": false,
+  "language": "python",
+  "style": "friendly"
+}
+
+# POST using JSON
+http --json POST http://127.0.0.1:8000/snippets/ code="print(456)"
+
+{
+    "id": 4,
+    "title": "",
+    "code": "print(456)",
+    "linenos": false,
+    "language": "python",
+    "style": "friendly"
+}
+```
