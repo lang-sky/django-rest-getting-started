@@ -230,3 +230,45 @@ http -a dev:111111 POST http://127.0.0.1:8000/snippets/ code="print(789)"
     "style": "friendly"
 }
 ```
+
+## Tutorial 5: Relationships & Hyperlinked APIs
+
+The api suffix
+
+- .json
+- .api
+- .html
+
+```bash
+http -a dev:111111 GET http://127.0.0.1:8000/snippets/
+
+{
+    "count": 2,
+    "next": null,
+    "previous": null,
+    "results": [
+        {
+            "code": "print('123')",
+            "highlight": "http://127.0.0.1:8000/snippets/1/highlight/", # highlight
+            "id": 1,
+            "language": "python",
+            "linenos": false,
+            "owner": "dev",
+            "style": "friendly",
+            "title": "",
+            "url": "http://127.0.0.1:8000/snippets/1/" # hyperlink
+        },
+        {
+            "code": "print(789)",
+            "highlight": "http://127.0.0.1:8000/snippets/2/highlight/",
+            "id": 2,
+            "language": "python",
+            "linenos": false,
+            "owner": "dev",
+            "style": "friendly",
+            "title": "",
+            "url": "http://127.0.0.1:8000/snippets/2/"
+        }
+    ]
+}
+```
