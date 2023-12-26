@@ -99,3 +99,54 @@ print(repr(serializer))
 #    style = ChoiceField(choices=[('autumn', 'autumn'), ('borland', 'borland'), ('bw', 'bw'), ('colorful', 'colorful')...
 
 ```
+
+### Testing our first attempt at a Web API
+
+```bash
+# run the server
+python manage.py runserver
+```
+
+in another terminal
+
+```bash
+pip install httpie
+
+## get a list of all of the snippets
+http http://127.0.0.1:8000/snippets/
+
+HTTP/1.1 200 OK
+...
+[
+  {
+    "id": 1,
+    "title": "",
+    "code": "foo = \"bar\"\n",
+    "linenos": false,
+    "language": "python",
+    "style": "friendly"
+  },
+  {
+    "id": 2,
+    "title": "",
+    "code": "print(\"hello, world\")\n",
+    "linenos": false,
+    "language": "python",
+    "style": "friendly"
+  }
+]
+
+## get a particular snippet by referencing its id:
+http http://127.0.0.1:8000/snippets/2/
+
+HTTP/1.1 200 OK
+...
+{
+  "id": 2,
+  "title": "",
+  "code": "print(\"hello, world\")\n",
+  "linenos": false,
+  "language": "python",
+  "style": "friendly"
+}
+```
